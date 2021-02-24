@@ -1,0 +1,54 @@
+{% extends 'blog/bottom.html' %}
+
+{% block settings %}
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  </body>
+</html>
+{% endblock %}
+{% block content %}
+    <div style="position: fixed; margin-left: 1440px; top: 15px">
+        <p>
+            <input type="button"  style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="Выход" onClick='location.href="http://127.0.0.1:8000/logout/"'>
+        </p>
+    </div>
+    <div style="position: fixed; margin-left: 1440px; top: 80px">
+        <p>
+            <input type="button"style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="фото+" onClick='location.href="http://127.0.0.1:8000/create_photo/"'>
+        </p>
+    </div>
+    <div style="position: fixed; margin-left: 1440px; top: 145px">
+        <p>
+            <input type="button"  style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="посты" onClick='location.href="http://127.0.0.1:8000/posts/"'>
+        </p>
+    </div>
+    <div style="position: fixed; margin-left: 1440px; top: 210px">
+        <p>
+            <input type="button"  style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="пост+" onClick='location.href="http://127.0.0.1:8000/create_post/"'>
+        </p>
+    </div>
+    {% for p in photo %}
+        <div class = "container">
+            <ul class = "list-group.mt-4" >
+                <li class = "list-group-item">
+                    <h3><d>{{ p.author }}</d></h3>
+                    <h1><b><img src="{{ p.image.url }}" class="img-responsive" style="width: 30%;"/></b></h1>
+                    <h3><c>published: {{ p.published_date }} </c></h3>
+                </li>
+            </ul>
+        </div>
+    {% endfor %}
+{% endblock %}

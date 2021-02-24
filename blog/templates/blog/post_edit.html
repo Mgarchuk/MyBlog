@@ -1,0 +1,105 @@
+{% extends 'blog/bottom.html' %}
+
+{% block settings %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+  </head>
+  <body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+  </body>
+</html>
+{% endblock %}
+
+{% block content %}
+    <div class = "container">
+        <ul class="nav nav-pills" style="margin-left: 490px">
+            <li class="nav-item">
+                <a class="nav-link active"  style="background-color: #FFFFFF; color: #06345B" href="/posts/">Главная</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" style="background-color: #06345B; color: #FFFFFF" href="">Управление</a>
+            </li>
+        </ul>
+    </div>
+
+    <div style="position: fixed; margin-left: 1440px; top: 15px">
+        <p>
+            <input type="button"  style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="Выход" onClick='location.href="http://127.0.0.1:8000/logout/"'>
+        </p>
+    </div>
+    <div style="position: fixed; margin-left: 1440px; top: 80px">
+        <p>
+            <input type="button"  style="
+            background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="фото" onClick='location.href="http://127.0.0.1:8000/photo_list/"'>
+        </p>
+    </div>
+    <div style="position: fixed; margin-left: 1440px; top: 145px">
+        <p>
+            <input type="button"style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="фото+" onClick='location.href="http://127.0.0.1:8000/create_photo/"'>
+        </p>
+    </div>
+    <div style="position: fixed; margin-left: 1440px; top: 210px">
+        <p>
+            <input type="button"  style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="посты" onClick='location.href="http://127.0.0.1:8000/posts/"'>
+        </p>
+    </div>
+    <div style="position: fixed; margin-left: 1440px; top: 275px">
+        <p>
+            <input type="button"  style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="пост+" onClick='location.href="http://127.0.0.1:8000/create_post/"'>
+        </p>
+    </div>
+
+    {% if update %}
+        <h3><a>Страница редактирования</a></h3>
+        <form method="POST" class="post-form">{% csrf_token %}
+            <h2><a>{{ form.title }}{{ form.author}} </a></h2>
+            <h2><a>{{ form.text }}</a></h2>
+            <h2><a>{{ form.image }}</a></h2>
+            <h2><a>{{ form.published_date }}</a></h2>
+            <button style="background-color: #06345B; height: 50px; width: 120px; border-color: #FFFFFF; color: #FFFFFF; margin-left: 700px; font-size: large; border-radius: 20px" type="submit" href="/#" class="save btn btn-dark">Сохранить</button>
+        </form>
+    {% else %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th width="5%" scope="col">id</th>
+                <th width="15%"  scope="col">Дата публикации</th>
+                <th width="15%" scope="col">Название</th>
+                <th width="10%" scope="col">Редактирование</th>
+                <th width="10%" scope="col">Удаление</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for post in post_list %}
+                <tr>
+                    <th scope="row">{{post.pk}}</th>
+                    <td>{{post.published_date}}</td>
+                    <td>{{post.title}}</td>
+                    <td><a href="{% url 'update_post' pk=post.pk %}">Редактировать</a></td>
+                    <td><a href="{% url 'delete_post' pk=post.pk %}">Удалить</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <div style="margin-left: 140px">
+        <p>
+            <input type="button"  style="background-color: #06345B; height: 50px; width: 180px; border-color: #FFFFFF; border-radius: 20px; font-size: large" value="Создать пост" onClick='location.href="http://127.0.0.1:8000/create_post/"'>
+        </p>
+        <br>
+    </div>
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'blog/bottom.html' %}
+
+{% block content %}
+    <div style="position: fixed; margin-left: 1440px; top: 15px">
+        <p>
+            <input type="button"  style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="Выход" onClick='location.href="http://127.0.0.1:8000/logout/"'>
+        </p>
+    </div>
+    <div style="position: fixed; margin-left: 1440px; top: 80px">
+        <p>
+            <input type="button"  style="
+            background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="фото" onClick='location.href="http://127.0.0.1:8000/photo_list/"'>
+        </p>
+    </div>
+    <div style="position: fixed; margin-left: 1440px; top: 145px">
+        <p>
+            <input type="button"style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="фото+" onClick='location.href="http://127.0.0.1:8000/create_photo/"'>
+        </p>
+    </div>
+    <div style="position: fixed; margin-left: 1440px; top: 210px">
+        <p>
+            <input type="button"  style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="посты" onClick='location.href="http://127.0.0.1:8000/posts/"'>
+        </p>
+    </div>
+    <div style="position: fixed; margin-left: 1440px; top: 275px">
+        <p>
+            <input type="button"  style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="пост+" onClick='location.href="http://127.0.0.1:8000/create_post/"'>
+        </p>
+    </div>
+
+    <div class="post">
+        <br>
+        <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+        <h3><b>{{ post.text|linebreaksbr }}</b></h3>
+        <h4><img src="{{ post.image.image.url }}" class="img-responsive" style="width: 35%;"/></h4>
+        <br>
+        <h3><c>published: {{ post.published_date }} </c></h3>
+    </div>
+
+    {% with comments.count as total_comments %}
+    <h2>
+        {{ total_comments }} comment{{ total_comments|pluralize }}
+    </h2>
+    {% endwith %}
+
+    {% for comment in comments %}
+        <div class="comment">
+            <div>
+                <hr>
+                <p class="info" style="color: #06345B; font-size: larger; margin-left: 100px">
+                    {{ comment.author }}
+                    <br>
+                </p>
+                <p class="info" style="color: black; font-size: large; margin-left: 100px">
+                    {{ comment.text }}
+                </p>
+
+                <p class="info" style="color: black; margin-left: 100px">
+                    {{ comment.published_date }}
+                </p>
+                <hr>
+            </div>
+
+        </div>
+    {% empty %}
+        <p>There are no comments yet.</p>
+    {% endfor %}
+
+    {% if new_comment %}
+        <h2>Your comment has been added.</h2>
+    {% else %}
+        <h2>Add a new comment</h2>
+        <form action="." method="post">
+            <div style="margin-left: 605px">
+                {{ comment_form.text }}
+            </div>
+            {% csrf_token %}
+            <div style="margin-left: 700px">
+                <p><input type="submit" style="color: #FFFFFF; background-color: #06345B; height: 50px; width: 120px;border-radius: 20px" value="Add comment"></p>
+            </div>
+        </form>
+    {% endif %}
+{% endblock %}

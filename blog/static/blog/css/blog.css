@@ -1,0 +1,41 @@
+h1 a {
+    color: #FFFFFF;
+}
+h2 a {
+    color: black;
+}
+h2 b{
+    color: #06345B;
+    font-size: 150%;
+    font-weight: bolder;
+}
+h2 c{
+    font-size: 70%;
+    font-weight: lighter;
+}
+
+h3 d{
+    font-weight: bolder;
+}
+h3 b{
+    font-weight: lighter;
+}
+
+p{
+    color: #FFFFFF;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+body h3{
+    padding-left: 100px;
+    padding-right: 100px;
+}
+body h4{
+    padding-left: 600px;
+}
+.page-header {
+    background-color: #06345B;
+    color: #FFFFFF;
+    margin-top: 0;
+    padding: 20px 20px 20px 40px;
+}

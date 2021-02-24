@@ -1,0 +1,23 @@
+{% extends 'blog/bottom.html' %}
+{% load static %}
+
+
+{% block content %}
+    <a>{{ request.user }}</a>
+    <div>
+        <br><br><br><br><br>
+    </div>
+    <form style="margin-left: 670px; margin-right: 825px; " id = "add_form" action="." method="post" >
+        {% csrf_token %}
+        <h2><c>Имя</c></h2>
+        {{ form.username }}
+        <br>
+        <h2><c>Пароль</c></h2>
+        {{ form.password }}
+        <div>
+            <br>
+        </div>
+        <button style="background-color: #06345B; height: 50px; width: 180px; color: #FFFFFF; border-color: #FFFFFF; border-radius: 20px" form="add_form" type="submit" class="btn mt-4"> Вход </button>
+        </form>
+        <br><br><br><br>
+{% endblock %}

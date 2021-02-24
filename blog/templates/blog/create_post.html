@@ -1,0 +1,35 @@
+{% extends 'blog/bottom.html' %}
+{% load static %}
+
+{% block content %}
+     <div style="position: fixed; margin-left: 1440px; top: 15px">
+        <p>
+            <input type="button"  style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="Выход" onClick='location.href="http://127.0.0.1:8000/logout/"'>
+        </p>
+    </div>
+    <div style="position: fixed; margin-left: 1440px; top: 80px">
+        <p>
+            <input type="button"style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="фото" onClick='location.href="http://127.0.0.1:8000/photo_list/"'>
+        </p>
+    </div>
+    <div style="position: fixed; margin-left: 1440px; top: 145px">
+        <p>
+            <input type="button"  style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="фото+" onClick='location.href="http://127.0.0.1:8000/create_photo/"'>
+        </p>
+    </div>
+    <div style="position: fixed; margin-left: 1440px; top: 210px">
+        <p>
+            <input type="button"  style="background-color: #06345B; height: 50px; width: 60px; border-color: #FFFFFF; border-radius: 20px" value="посты" onClick='location.href="http://127.0.0.1:8000/posts/"'>
+        </p>
+    </div>
+    <h1>New post</h1>
+        <form method="POST" class="post-form">{% csrf_token %}
+            <h2><a>{{ form.title }} </a></h2>
+            <h2><a>{{ form.text }}</a></h2>
+            <h2><a>{{ form.image }}</a></h2>
+        <button style="background-color: #06345B;margin-left: 700px; height: 50px; width: 120px; border-color: #FFFFFF; color: #FFFFFF; border-radius: 20px" type="submit" href="/#" class="save btn btn-dark">Сохранить</button>
+        </form>
+
+
+
+{% endblock %}
